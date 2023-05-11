@@ -32,6 +32,7 @@ class Admin extends CI_Controller {
 		$data['data2'] = $this->M_Admin->get_data_count();
 		$data['data3'] = $this->M_Admin->get_data_pending();
 		$this->load->view('index/navadmin', $data);
+		$this->load->view('index/dashadmin/header');
 		$this->load->view('index/dashadmin/index');	
 	}
 

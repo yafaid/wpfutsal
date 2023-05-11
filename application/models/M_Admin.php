@@ -30,12 +30,23 @@ class M_Admin extends CI_Model {
         return $query->result();
     }
 
-    public function update_status($id, $status) {
+    // public function update_status($id, $status) {
+    //     $data = array(
+    //       'is_active' => $status
+    //     );
+    //     $this->db->where('id', $id);
+    //     $this->db->update('order', $data);
+    //     return $this->db->affected_rows() > 0;
+    // }
+
+    public function updateStatus($id, $status) {
         $data = array(
-          'is_active' => $status
+            'is_active' => $status
         );
+
         $this->db->where('id', $id);
         $this->db->update('order', $data);
+
         return $this->db->affected_rows() > 0;
-      }
+    }
 }
