@@ -20,6 +20,23 @@
             });
         });
         });
+        // Ambil semua elemen td dengan class "jamxxxx" dari tabel
+        var tdElements = document.querySelectorAll("td[class^='jam']");
+
+        // Loop melalui setiap elemen td
+        for (var i = 0; i < tdElements.length; i++) {
+        var tdElement = tdElements[i];
+        var jam = tdElement.classList[1]; // Dapatkan class kedua dari elemen td (misal: jam0800)
+        var checkbox = document.querySelector("input[value='" + jam.substr(3) + "']"); // Cari elemen checkbox dengan value yang sama dengan jam (misal: 0800)
+
+        // Cek apakah checkbox di-check atau tidak
+        if (checkbox.checked) {
+            tdElement.textContent = "Diisi"; // Jika di-check, isi kolom dengan teks "Diisi"
+        } else {
+            tdElement.textContent = "Kosong"; // Jika tidak di-check, isi kolom dengan teks "Kosong"
+        }
+        }
+
     </script>
     <body id="page-top">                                                   
         <section class="page-section">
@@ -58,20 +75,20 @@
                                 <tbody>
                                     <tr>
                                     <td>Lapangan 1</td>
-                                    <td class="lap1 jam0800"></td>
-                                    <td class="lap1 jam1000"></td>
-                                    <td class="lap1 jam1200"></td>
-                                    <td class="lap1 jam1400"></td>
-                                    <td class="lap1 jam1600"></td>
-                                    <td class="lap1 jam1800"></td>
-                                    <td class="lap1 jam2000"></td>
-                                    <td class="lap1 jam2200"></td>
-                                    <td class="lap1 jam0800"></td>
-                                    <td class="lap1 jam1000"></td>
-                                    <td class="lap1 jam1200"></td>
-                                    <td class="lap1 jam1400"></td>
-                                    <td class="lap1 jam1600"></td>
-                                    <td class="lap1 jam1800"></td>                                    
+                                    <td class="lap1 9"></td>
+                                    <td class="lap1 10"></td>
+                                    <td class="lap1 11"></td>
+                                    <td class="lap1 12"></td>
+                                    <td class="lap1 13"></td>
+                                    <td class="lap1 14"></td>
+                                    <td class="lap1 15"></td>
+                                    <td class="lap1 16"></td>
+                                    <td class="lap1 17"></td>
+                                    <td class="lap1 18"></td>
+                                    <td class="lap1 19"></td>
+                                    <td class="lap1 20"></td>
+                                    <td class="lap1 21"></td>
+                                    <td class="lap1 22"></td>                                    
                                     </tr>
                                     </tr>
                                     <tr>

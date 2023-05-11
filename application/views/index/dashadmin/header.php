@@ -17,8 +17,6 @@
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.min.js"></script>
         <script src="<?= base_url('node_modules/') ?>moment/moment.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-        <!-- CSS DataTables -->
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
     </head>
 
     <header class="masthead bg-primary text-white text-center ">
