@@ -6,20 +6,8 @@ class M_User extends CI_Model {
 	{		
         parent::__construct();
 		$this->load->database();
-	}   
-
-    public function get_order_with_lapangan()
-    {
-        $today = date('Y-m-d');
-    
-        $this->db->select('o.*, l.lapangan');
-        $this->db->from('order o');
-        $this->db->join('lapangan l', 'o.lapangan_id = l.id');
-        $this->db->where('o.tanggal', $today);
-        $this->db->where('o.is_active', 2);
-        $query = $this->db->get();
-        return $query->result();
-    }
+	}
+	
 	
     public function get_data_by_user_id($user_id)
     {
@@ -37,10 +25,32 @@ class M_User extends CI_Model {
         return $result->total_order;
     }
 
-    public function pesan($data){
-        $this->db->insert('order', $data);
-    }
-       
+    public function pesan($data,$jam){
 
-    
+        $this->db->trans_start();
+        foreach ($jam as $j) {
+            $data['jam'] = $j;
+            $this->db->insert('order', $data);
+        }
+        $this->db->trans_complete();
+
+        if ($this->db->trans_status() === FALSE) {
+            // transaction failed
+            return FALSE;
+        } else {
+            // transaction succeeded
+            return TRUE;
+        } 
+    }
+
+    public function get_pesan($where, $lap)
+    {
+        $this->db->select('order.tanggal, jam.jam, lapangan.lapangan');
+        $this->db->from('order');
+        $this->db->join('jam', 'order.jam = jam.id');
+        $this->db->join('lapangan', 'order.lapangan_id = lapangan.id');
+        $this->db->where(['order.tanggal' => $where,'order.lapangan_id' => $lap , 'order.is_active' => '2' ]);
+        $result = $this->db->get()->result();
+        return $result;
+    }
 }

@@ -21,96 +21,83 @@ class Booking extends CI_Controller {
         $this->form_validation->set_rules('lapangan', 'Lapangan', 'required');
         $this->form_validation->set_rules('date', 'Tanggal', 'required');
         $this->form_validation->set_rules('jam[]', 'Jam', 'required');
-        
-        // if ($this->form_validation->run() == FALSE) {
-        //      // validation failed
-        //     $this->session->set_flashdata('fail','<div class="alert alert-danger text-center text-uppercase" role="alert">
-        //     Isi Data dengan benar
-        //     </div>');
-        //     redirect('user/pesan');
-        //  } else {
-        //      // validation succeeded, save booking to database
-        //     $jam = $this->input->post('jam'); //ubah menjadi variabel $jam
-        //     $jam_string = implode(',', $jam); //ubah menjadi string
-        //     $data = array(
-        //          'user_id' => $this->session->userdata('iduser'),
-        //          'lapangan_id' => $this->input->post('lapangan'),
-        //          'tanggal' => $this->input->post('date'),
-        //         //  'jam' => implode(',', $this->input->post('jam')),
-        //         //  'jam' => $jam_string,
-        //          'is_active' => $this->input->post('is_active')
-        //      );
-             
-        //     $this->load->model('M_User');
-        //     $this->M_User->pesan($data,$jam);
-        //     //  redirect ke halaman lain
-        //     $this->session->set_flashdata('success','<div class="alert alert-success text-center text-uppercase" role="alert">
-        //     Akun telah memesan
-        //       </div>');
-        //     redirect('user/dashboard');
-        
+ 
         if ($this->form_validation->run() == FALSE) {
-            // validation failed
-            $this->session->set_flashdata('fail', '<div class="alert alert-danger text-center text-uppercase" role="alert">Isi Data dengan benar</div>');
+             // validation failed
+            $this->session->set_flashdata('fail','<div class="alert alert-danger text-center text-uppercase" role="alert">
+            Isi Data dengan benar
+            </div>');
             redirect('user/pesan');
-        } else {
-            // validation succeeded, save booking to database
-            $jam = $this->input->post('jam');
-            $jam_string = implode(',', $jam);
-            $data = array(
-                'user_id' => $this->session->userdata('iduser'),
-                'lapangan_id' => $this->input->post('lapangan'),
-                'tanggal' => $this->input->post('date'),
-                'jam' => $jam_string,
-                'is_active' => $this->input->post('is_active')
-            );
-    
-            $this->db->trans_start(); // Memulai transaksi
-    
-            // Upload gambar bukti pembayaran
-            $config['upload_path'] = './uploads/bukti'; // Sesuaikan dengan folder penyimpanan gambar
-            $config['allowed_types'] = 'jpg|jpeg|png';
-            $config['max_size'] = 2048; // Ukuran maksimum gambar (dalam kilobita)
-            $this->load->library('upload', $config);
-    
-            if ($this->upload->do_upload('bukti')) {
-                $upload_data = $this->upload->data();
-                $data['bukti'] = $upload_data['file_name'];
-    
-                $this->load->model('M_User');
-                $this->M_User->pesan($data);
-            } else {
-                // Jika upload gagal, batalkan transaksi dan tampilkan pesan error
-                $this->db->trans_rollback(); // Membatalkan transaksi
-                $this->session->set_flashdata('fail2', '<div class="alert alert-danger text-center">Gagal mengupload bukti pembayaran: ' . $this->upload->display_errors() . '</div>');
-                redirect('user/pesan');
-            }
-    
-            $this->db->trans_complete(); // Menyelesaikan transaksi
-    
-            if ($this->db->trans_status() === FALSE) {
-                // Jika terjadi kesalahan pada transaksi, tampilkan pesan error
-                $this->session->set_flashdata('fail3', '<div class="alert alert-danger text-center">Gagal menyimpan data pesanan</div>');
-            } else {
-                // Transaksi berhasil, tampilkan pesan sukses
-                $this->session->set_flashdata('success', '<div class="alert alert-success text-center text-uppercase" role="alert">Akun telah memesan</div>');
-            }
-    
-            redirect('user/dashboard');
-        }        
+         } else {
+             // validation succeeded, save booking to database
+            $jam = $this->input->post('jam'); //ubah menjadi variabel $jam
+            $jam_string = implode(',', $jam); //ubah menjadi string
+            $config['upload_path'] = './uploads/bukti'; // Ganti dengan path direktori upload yang sesuai
+            $config['allowed_types'] = 'jpg|jpeg|png'; // jenis file yang diizinkan untuk diupload
+            $config['file_name'] = 'bukti' . '_' . time();
+            $config['overwrite'] = TRUE; // overwrite file jika file dengan nama yang sama sudah ada
+            $config['max_size'] = 5024; // ukuran maksimum file dalam kb   	      
+            $this->load->library('upload');	
+            $this->upload->initialize($config);
+
+
+            if (!$this->upload->do_upload('bukti')) {
+              // Jika proses pengunggahan gagal
+              $error = $this->upload->display_errors();
+              $this->session->set_flashdata('fail','<div class="alert alert-danger text-center text-uppercase" role="alert">
+              Error: ' . $error . '
+              </div>');
+              redirect('user/pesan');
+          } else {
+              // Data untuk disimpan ke database
+              $data = array(
+                  'user_id' => $this->session->userdata('iduser'),
+                  'lapangan_id' => $this->input->post('lapangan'),
+                  'tanggal' => $this->input->post('date'),
+                  'bukti' => $this->upload->data('file_name'),
+                  'is_active' => $this->input->post('is_active')
+              );
+  
+              $this->load->model('M_User');
+              $this->M_User->pesan($data, $jam);
+  
+              // Redirect ke halaman lain
+              $this->session->set_flashdata('success','<div class="alert alert-success text-center text-uppercase" role="alert">
+              Akun telah memesan
+              </div>');
+              redirect('user/dashboard');
+          }
+
+
+            // $data = array(
+            //      'user_id' => $this->session->userdata('iduser'),
+            //      'lapangan_id' => $this->input->post('lapangan'),
+            //      'tanggal' => $this->input->post('date'),
+            //      'bukti' => $this->input->post('date'),
+            //     //  'jam' => implode(',', $this->input->post('jam')),
+            //     //  'jam' => $jam_string,
+            //      'is_active' => $this->input->post('is_active')
+            //  );
+            // $this->load->model('M_User');
+            // $this->M_User->pesan($data,$jam);
+            // //  redirect ke halaman lain
+            // $this->session->set_flashdata('success','<div class="alert alert-success text-center text-uppercase" role="alert">
+            // Akun telah memesan
+            //   </div>');
+            // redirect('user/dashboard');
+        }      
     }
     
     public function change_status() {
+        $this->load->model('M_Admin');
         $id = $this->input->post('id');
         $status = $this->input->post('status');
-
-        $this->load->model('M_Admin');
-        $result = $this->M_Admin->updateStatus($id, $status);
-
+        $result = $this->M_Admin->update_status($id, $status);
         if ($result) {
-            echo 'success';
+          echo 'success';
         } else {
-            echo 'error';
+          echo 'failed';
         }
-    }
+      }
+    
 }

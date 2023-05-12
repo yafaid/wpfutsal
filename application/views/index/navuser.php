@@ -37,7 +37,7 @@
                 <?php } else if ($this->session->userdata('role_id') == 2){ ?>
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="<?= site_url('user/pesan') ?>">Jadwal <i class="fas fa-calendar-days"></i></a></li>
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="<?= site_url('user/pesanan') ?>">Pesanan <i class="fas fa-pen-to-square"></i></a></li>
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="<?= site_url('user/dashboard') ?>">Profil <i class="far fa-user text-center"></i></a></li>
+                    <!-- <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="<?= site_url('user/dashboard') ?>">Profil <i class="far fa-user text-center"></i></a></li> -->
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="<?= site_url('login/logout') ?>">Logout <i class="fas fa-arrow-right-from-bracket"></i></a></li>
                 <?php } else {?>
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="<?= site_url('login') ?>">Login</a></li>

@@ -30,10 +30,14 @@ class Admin extends CI_Controller {
 		$user_id = $this->session->userdata('iduser');
 		$data['data'] = $this->M_Admin->get_data();
 		$data['data2'] = $this->M_Admin->get_data_count();
-		$data['data3'] = $this->M_Admin->get_data_pending();
-		$this->load->view('index/navadmin', $data);
-		$this->load->view('index/dashadmin/header');
-		$this->load->view('index/dashadmin/index');	
+		$data['pending'] = $this->M_Admin->get_data_pending();
+		$this->load->view('index/navadmin');
+		$this->load->view('index/dashadmin/index', $data);	
 	}
 
+	public function jadwal()
+	{
+		$this->load->view('index/navadmin');
+		$this->load->view('index/dashadmin/jadwal');	
+	}
 }

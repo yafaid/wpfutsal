@@ -29,7 +29,7 @@ class Register extends CI_Controller {
 		// $this->form_validation->set_rules('ktp', 'KTP', 'required|uploaded[ktp]');
 		$config['upload_path'] = './uploads/'; // direktori penyimpanan gambar
 		$config['allowed_types'] = 'jpg|jpeg|png'; // jenis file yang diizinkan untuk diupload
-		$config['file_name'] = 'user' . '_' . time();
+		$config['file_name'] = 'nama' . '_' . time();
 		$config['overwrite'] = TRUE; // overwrite file jika file dengan nama yang sama sudah ada
 		$config['max_size'] = 5024; // ukuran maksimum file dalam kb   	      
 		$this->load->library('upload');	

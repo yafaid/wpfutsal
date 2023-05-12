@@ -40,7 +40,7 @@ class User extends CI_Controller {
 		$user_id = $this->session->userdata('iduser');
 		$data['data'] = $this->M_User->get_data_by_user_id($user_id);
 		$data['data2'] = $this->M_User->count_order_by_id($user_id);
-		$this->load->view('index/navuser',$data);
+		$this->load->view('index/navuser');
 		$this->load->view('index/dashboard/header');							
 		$this->load->view('index/dashboard/index');		
 		$this->load->view('index/footeruser');						
@@ -48,10 +48,9 @@ class User extends CI_Controller {
 
 	public function pesan()
 	{						
-		$user_id = $this->session->userdata('iduser');	
-		$data['jadwal'] = $this->M_User->get_order_with_lapangan();
-
-		$this->load->view('index/navuser',$data);
+		$user_id = $this->session->userdata('iduser');		
+		$data['data2'] = $this->M_User->count_order_by_id($user_id);
+		$this->load->view('index/navuser');
 		$this->load->view('index/dashboard/header');							
 		$this->load->view('index/dashboard/pesan');		
 		$this->load->view('index/footeruser');						
@@ -67,6 +66,10 @@ class User extends CI_Controller {
 		$this->load->view('index/dashboard/pesanan');		
 		$this->load->view('index/footeruser');					
 	}
+	public function get_status()
+    {
+		$data =  $this->M_User->get_pesan($this->input->post('date'),$this->input->post('lap'));
 
-	
+		print_json($data);
+	}
 }

@@ -10,7 +10,7 @@
             // Aktifkan datepicker pada input dengan class "datepicker"
             $( ".datepicker" ).datepicker({
                 dateFormat: "yy-mm-dd",
-                maxDate:'today',
+                maxDate:'+2d',
                 minDate:'today'
             });
         });
@@ -23,6 +23,48 @@
             }
         });
         }
+    
+        
+        function calculateTotalBayar() {
+            // Ambil nilai tanggal dari input dengan ID 'date'
+            var tanggal = document.getElementById('date').value;
+
+            // Ambil nilai jam dari checkbox dengan name 'jam[]'
+            var jam = document.getElementsByName('jam[]');
+            var total_jam = 0;
+            for (var i = 0; i < jam.length; i++) {
+                if (jam[i].checked) {
+                    total_jam++;
+                }
+            }
+
+            // Hitung total bayar dengan mengalikan 100 setiap satu jam yang dicentang pada checkbox jam
+            var total_bayar = total_jam * 100;
+
+            // Tampilkan hasil total bayar pada element dengan ID 'total-bayar'
+            document.getElementById('total-bayar').innerHTML = 'Rp ' + total_bayar + '.000' ;
+        }
+
+        // Panggil fungsi calculateTotalBayar() ketika ada perubahan pada input tanggal atau checkbox jam
+        // var date_input = document.getElementById('date');
+        // date_input.addEventListener('change', calculateTotalBayar);
+
+        // var jam_input = document.getElementsByName('jam[]');
+        // for (var i = 0; i < jam_input.length; i++) {
+        //     jam_input[i].addEventListener('change', calculateTotalBayar);
+        // }
+
+        document.addEventListener('DOMContentLoaded', function() {
+        var date_input = document.getElementById('date');
+        if (date_input) {
+            date_input.addEventListener('change', calculateTotalBayar);
+        }
+
+        var jam_input = document.getElementsByName('jam[]');
+        for (var i = 0; i < jam_input.length; i++) {
+            jam_input[i].addEventListener('change', calculateTotalBayar);
+        }
+    });
 
     </script>
     <body id="page-top">                                
@@ -35,39 +77,9 @@
                     <div class="divider-custom-line"></div>
                     <div class="divider-custom-icon"><i class="far fa-futbol"></i></div>
                     <div class="divider-custom-line"></div>
-                </div>        
-                <div class="container row d-flex justify-content-center">
-                        <div class="card shadow-lg border-5 rounded-lg mt-5 col-md-12 col-sm-12 mb-3">      
-                            <div class="row justify-content-center table table-responsive">
-                            
-                            <table class="table table-responsive">
-                                <thead>
-                                    <tr>
-                                    <th>Jam</th>
-                                    <th>Lapangan</th>
-                                    <th></th>
-                                    <!-- Tambahkan kolom-kolom lain yang diperlukan -->
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($jadwal as $row) { ?>
-                                    <tr>
-                                        <td><?php echo $row->jam; ?></td>
-                                        <td><?php echo $row->lapangan; ?></td>
-                                        <td><?php echo $row->is_active; ?>Terpesan</td>
-                                        <!-- Tambahkan kolom-kolom lain yang diperlukan -->
-                                    </tr>
-                                    <?php } ?>
-                                </tbody>
-                                </table>  
-                                </div>                                                                                
-                        <div class="card-footer text-center py-5 ">   
-                            <h3 class="text-center text-uppercase">Jadwal Hari ini</h2>                     
-                        </div>
-                    </div>
-                </div>         
+                </div>                
                 
-                <form method="post" action="<?php echo base_url('booking/process'); ?>">
+                <form method="post" action="<?php echo base_url('booking/process'); ?>" enctype="multipart/form-data">
                     <div class="container row d-flex justify-content-center">
                         <div class="card shadow-lg border-5 rounded-lg mt-5 col-md-3 col-sm-12 mb-3">                                                                                           
                             <div class="card-body">
@@ -83,63 +95,61 @@
                     <div class="card shadow-lg border-5 rounded-lg mt-5 col-md-9 col-sm-12 mb-3">
                         <div class="card-body">
                             <div class="row justify-content-left">
-                                <h5>Siang</h5>
-                                <div class="card  col-md-2 col-sm-12 mb-3">
-                                <h5 class="text-center mb-1">9.00</h1>
-                                <input class="mb-3" type="checkbox" name="jam[]" value="9">
-                                </div>                                
-                                <div class="card  col-md-2 col-sm-12 mb-3">
-                                <h5 class="text-center mb-1">10.00</h1>
-                                <input class="mb-3" type="checkbox" name="jam[]" value="10">
+                                <div class="card mt-5 col-md-3 col-sm-6 mb-3">
+                                    <h4 class="text-center text-uppercase text-secondary mb-0"> 09.00</h4>
+                                    <input type="checkbox" name="jam[]" id="jam_09"  value="9"><br>
                                 </div>
-                                <div class="card  col-md-2 col-sm-12 mb-3">
-                                <h5 class="text-center mb-1">11.00</h1>
-                                <input class="mb-3" type="checkbox" name="jam[]" value="11">
+                                <div class="card mt-5 col-md-3 col-sm-6 mb-3">
+                                    <h4 class="text-center text-uppercase text-secondary mb-0"> 10.00</h4>
+                                    <input type="checkbox" name="jam[]" id="jam_10" value="10"><br>
                                 </div>
-                                <div class="card  col-md-2 col-sm-12 mb-3">
-                                <h5 class="text-center mb-1">12.00</h1>
-                                <input class="mb-3" type="checkbox" name="jam[]" value="12">
+                                <div class="card mt-5 col-md-3 col-sm-6 mb-3">
+                                    <h4 class="text-center text-uppercase text-secondary mb-0"> 11.00</h4>
+                                    <input type="checkbox" name="jam[]" id="jam_11" value="11"><br>
                                 </div>
-                                <div class="card  col-md-2 col-sm-12 mb-3">
-                                <h5 class="text-center mb-1">13.00</h1>
-                                <input class="mb-3" type="checkbox" name="jam[]" value="13">
+                                <div class="card mt-5 col-md-3 col-sm-6 mb-3">
+                                    <h4 class="text-center text-uppercase text-secondary mb-0"> 12.00</h4>
+                                    <input type="checkbox" name="jam[]" id="jam_12" value="12"><br>
                                 </div>
-                                <div class="card  col-md-2 col-sm-12 mb-3">
-                                <h5 class="text-center mb-1">14.00</h1>
-                                <input class="mb-3" type="checkbox" name="jam[]" value="14">
+                                <div class="card mt-5 col-md-3 col-sm-6 mb-3">          
+                                    <h4 class="text-center text-uppercase text-secondary mb-0"> 13.00</h4>                          
+                                    <input type="checkbox" name="jam[]" id="jam_13" value="13"><br>
                                 </div>
-                                <div class="card  col-md-2 col-sm-12 mb-3">
-                                <h5 class="text-center mb-1">15.00</h1>
-                                <input class="mb-3" type="checkbox" name="jam[]" value="15">
+                                <div class="card mt-5 col-md-3 col-sm-6 mb-3">
+                                    <h4 class="text-center text-uppercase text-secondary mb-0"> 14.00</h4>
+                                    <input type="checkbox" name="jam[]" id="jam_14" value="14"><br>
                                 </div>
-                                <div class="card  col-md-2 col-sm-12 mb-3">
-                                <h5 class="text-center mb-1">16.00</h1>
-                                <input class="mb-3" type="checkbox" name="jam[]" value="16">
+                                <div class="card mt-5 col-md-3 col-sm-6 mb-3">
+                                    <h4 class="text-center text-uppercase text-secondary mb-0"> 15.00</h4>
+                                    <input type="checkbox" name="jam[]" id="jam_15" value="15"><br>
                                 </div>
-                                <div class="card  col-md-2 col-sm-12 mb-3">
-                                <h5 class="text-center mb-1">17.00</h1>
-                                <input class="mb-3" type="checkbox" name="jam[]" value="17">
+                                <div class="card mt-5 col-md-3 col-sm-6 mb-3">
+                                    <h4 class="text-center text-uppercase text-secondary mb-0"> 16.00</h4>
+                                    <input type="checkbox" name="jam[]" id="jam_16" value="16"><br>
                                 </div>
-                                <h5>Malam</h5>
-                                <div class="card  col-md-2 col-sm-12 mb-3">
-                                <h5 class="text-center mb-1">18.00</h1>
-                                <input class="mb-3" type="checkbox" name="jam[]" value="18">
+                                <div class="card mt-5 col-md-3 col-sm-6 mb-3">
+                                    <h4 class="text-center text-uppercase text-secondary mb-0"> 17.00</h4>
+                                    <input type="checkbox" name="jam[]" id="jam_17" value="17"><br>
                                 </div>
-                                <div class="card  col-md-2 col-sm-12 mb-3">
-                                <h5 class="text-center mb-1">19.00</h1>
-                                <input class="mb-3" type="checkbox" name="jam[]" value="19">
+                                <div class="card mt-5 col-md-3 col-sm-6 mb-3">
+                                    <h4 class="text-center text-uppercase text-secondary mb-0"> 18.00</h4>
+                                    <input type="checkbox" name="jam[]" id="jam_18" value="18"><br>
                                 </div>
-                                <div class="card  col-md-2 col-sm-12 mb-3">
-                                <h5 class="text-center mb-1">20.00</h1>
-                                <input class="mb-3" type="checkbox" name="jam[]" value="20">
+                                <div class="card mt-5 col-md-3 col-sm-6 mb-3">
+                                    <h4 class="text-center text-uppercase text-secondary mb-0"> 19.00</h4>
+                                    <input type="checkbox" name="jam[]" id="jam_19" value="19"><br>
                                 </div>
-                                <div class="card  col-md-2 col-sm-12 mb-3">
-                                <h5 class="text-center mb-1">21.00</h1>
-                                <input class="mb-3" type="checkbox" name="jam[]" value="21">
+                                <div class="card mt-5 col-md-3 col-sm-6 mb-3">
+                                    <h4 class="text-center text-uppercase text-secondary mb-0"> 20.00</h4>
+                                    <input type="checkbox" name="jam[]" id="jam_20" value="20"><br>
                                 </div>
-                                <div class="card  col-md-2 col-sm-12 mb-3">
-                                <h5 class="text-center mb-1">22.00</h1>
-                                <input class="mb-3" type="checkbox" name="jam[]" value="22">
+                                <div class="card mt-5 col-md-3 col-sm-6 mb-3">
+                                    <h4 class="text-center text-uppercase text-secondary mb-0"> 21.00</h4>
+                                    <input type="checkbox" name="jam[]" id="jam_21" value="21"><br>
+                                </div>
+                                <div class="card mt-5 col-md-3 col-sm-6 mb-3">
+                                    <h4 class="text-center text-uppercase text-secondary mb-0"> 22.00</h4>
+                                    <input type="checkbox"  name="jam[]" id="jam_22" value="22"><br>
                                 </div>
                             </div>
                         </div>
@@ -152,7 +162,7 @@
                         <div class="card shadow-lg border-5 rounded-lg mt-5 col-md-4 col-sm-12 mb-3">                                                                                           
                             <div class="card-body ">
                                 <div class="row justify-content-center">
-                                    <input type="checkbox" name="lapangan" value="1" onchange="checkOnlyOne(this)">                                 
+                                    <input type="radio" name="lapangan" id="lap_1" value="1" onchange="cek_lapangan('1')">                                 
                                 </div>     
                             </div>
                             <div class="card-footer text-center py-5">   
@@ -164,7 +174,7 @@
                         <div class="card shadow-lg border-5 rounded-lg mt-5 col-md-4 col-sm-12 mb-3">                                                                                           
                             <div class="card-body">
                                 <div class="row justify-content-center">
-                                    <input type="checkbox" name="lapangan" value="2" onchange="checkOnlyOne(this)">
+                                    <input type="radio" name="lapangan" id="lap_2" value="2"  onchange="cek_lapangan('2')">
                                 </div>     
                             </div>
                             <div class="card-footer text-center py-5">   
@@ -175,7 +185,7 @@
                         <div class="card shadow-lg border-5 rounded-lg mt-5 col-md-4 col-sm-12 mb-3">                                                                                           
                             <div class="card-body">
                                 <div class="row justify-content-center">
-                                    <input type="checkbox" name="lapangan" value="3" onchange="checkOnlyOne(this)">
+                                    <input type="radio" name="lapangan" id="lap_3" value="3"  onchange="cek_lapangan('3')">
                                 </div>     
                             </div>
                             <div class="card-footer text-center py-5">   
@@ -190,15 +200,13 @@
                                 <div class="card-body ">
                                     <div class="row justify-content-center">  
                                     <?=$this->session->flashdata('fail') ?>  
-                                    <?=$this->session->flashdata('fail2') ?>  
-                                    <h3 class="text-center text-uppercase">Total Bayar</h3>
-                                    <span id="total-bayar"></span>                                                                                   
+                                    <h3 class="text-center text-uppercase">Total Bayar : <span id="total-bayar"></span></h3>
+                                    <h3></h3>                                                                                 
                                     </div>     
                                 </div>
                                 <div class="card-footer text-center py-5">   
-                                    <p class="text-center text-uppercase">Silahkan Upload bukti pembayaran</p>
-                                    <input type="file" class="btn btn-xs btn-outline-dark w-100" name="bukti" id="bukti" value="<?= set_value('bukti');?>" required="required"> <br><br>                      
-                                    <input type="submit" class="btn btn-xl btn-outline-dark" value="Submit">         
+                                    <input type="file" class="btn btn-xl btn-outline-dark w-100" name="bukti" id="bukti" value="<?= set_value('bukti');?>" required="required"><br><br>
+                                    <input type="submit" class="btn btn-xl btn-outline-dark" value="Submit">                                  
                                 </div>
                             </div>
                         </div>
@@ -207,6 +215,74 @@
         </section>
         
         <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+        <script>
+
+            addEventListener('load', function () {
+
+                   $(`#jam_09`).prop('disabled', true);
+                      for (let i = 9; i <= 22; i++) {
+                       $(`#jam_${i}`).prop( "disabled", true );
+                    }
+            });
+
+            $("#date").change(function(){
+                $(`#jam_09`).prop('disabled', true);
+                      for (let i = 9; i <= 22; i++) {
+                       $(`#jam_${i}`).prop( "disabled", true );
+                    }
+                    $("#lap_1").prop("checked", false);
+                    $("#lap_2").prop("checked", false);
+                    $("#lap_3").prop("checked", false);
+            });
+            function cek_lapangan(lap)
+            {
+
+                var date = $('#date').val();
+               
+                if(date){ console.log('1');
+                $(`#jam_09`).prop( "disabled", false );
+                  $(`#jam_09`).prop('checked', false);
+                      for (let i = 9; i <= 22; i++) {
+                       $(`#jam_${i}`).prop( "disabled", false );
+                       $(`#jam_${i}`).prop('checked', false);
+                    }
+                    var date = $('#date').val();
+                    $.ajax({
+                    url: "/wpfutsal/user/satus/get",
+                    method: "post",
+                    data: {'date' : date, 'lap' : lap},
+                    success: function(data) {
+
+                  
+
+                        $.each( data, function( key, value ) {
+                    
+                            let string_input = value.jam;
+                            let match = string_input.match(/^\d{2}/);
+                             $(`#jam_${match[0]}`).prop( "disabled", true );
+                        });
+
+                    },
+                    error: function(data){
+                        
+                    }
+                    });
+                }else{
+                    alert('Pilih tanggal dahulu');
+                    $("#lap_1").prop("checked", false);
+                    $("#lap_2").prop("checked", false);
+                    $("#lap_3").prop("checked", false);
+                }
+
+            }
+            function get_date(){
+                var today = new Date();
+                    var dd = String(today.getDate()).padStart(2, '0');
+                    var mm = String(today.getMonth() + 1).padStart(2, '0');
+                    var yyyy = today.getFullYear();
+                    return  today = yyyy + '-' + mm + '-' + dd;
+            }
+        </script>
     </body>
     </html>
     

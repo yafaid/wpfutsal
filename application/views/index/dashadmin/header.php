@@ -11,12 +11,8 @@
         <link href="<?= base_url('assets/') ?>home/css/styles.css" rel="stylesheet" />
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
         <!-- jQuery -->
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <!-- Plugin datepicker dan timepicker -->
-        <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.min.js"></script>
-        <script src="<?= base_url('node_modules/') ?>moment/moment.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        
     </head>
 
     <header class="masthead bg-primary text-white text-center ">
