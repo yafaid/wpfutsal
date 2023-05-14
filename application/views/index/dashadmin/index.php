@@ -33,7 +33,7 @@
                                             <th>Lapangan</th>
                                             <th>Tanggal</th>
                                             <th>Jam</th>
-                                            <th>Status</th>
+                                            <th>Bukti</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -45,7 +45,10 @@
                                             <td><?= $row->lapangan_id; ?></td>
                                             <td><?= $row->tanggal; ?></td>
                                             <td><?= $row->jam; ?>.00</td>
-                                            <td><?php if($row->is_active == 1){ echo 'Pending'; } ?>
+                                            <td>
+                                                <?php if ($row->bukti): ?>
+                                                    <img src="<?= base_url('uploads/bukti/' . $row->bukti) ?>" style="max-width: 200px; height: auto;" alt="Bukti">
+                                                <?php endif; ?>                                           
                                             </td>
                                             <td>
                                             <?php if($this->session->userdata('role_id') == 1){ ?>

@@ -55,3 +55,4 @@ $route['translate_uri_dashes'] = FALSE;
 
 
 $route['user/satus/get']['post'] = 'User/get_status';
+$route['admin/satus/get']['post'] = 'Admin/get_status';

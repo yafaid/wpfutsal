@@ -67,24 +67,6 @@ class Booking extends CI_Controller {
               </div>');
               redirect('user/dashboard');
           }
-
-
-            // $data = array(
-            //      'user_id' => $this->session->userdata('iduser'),
-            //      'lapangan_id' => $this->input->post('lapangan'),
-            //      'tanggal' => $this->input->post('date'),
-            //      'bukti' => $this->input->post('date'),
-            //     //  'jam' => implode(',', $this->input->post('jam')),
-            //     //  'jam' => $jam_string,
-            //      'is_active' => $this->input->post('is_active')
-            //  );
-            // $this->load->model('M_User');
-            // $this->M_User->pesan($data,$jam);
-            // //  redirect ke halaman lain
-            // $this->session->set_flashdata('success','<div class="alert alert-success text-center text-uppercase" role="alert">
-            // Akun telah memesan
-            //   </div>');
-            // redirect('user/dashboard');
         }      
     }
     

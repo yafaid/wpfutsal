@@ -30,19 +30,6 @@ class M_Admin extends CI_Model {
         $this->db->where('is_active', 1);
         $query = $this->db->get('order');
         return $query->result();
-        
-        // $this->db->select('order.id');
-        // $this->db->from('order');
-        // $this->db->join('user', 'user.iduser = order.user_id');
-        // $this->db->where('order.is_active', 1);
-        // $query = $this->db->get();
-        // $result = $query->result_array();
-
-        // Mengakses nomor telepon (no_hp)
-        // foreach ($result as $row) {
-        //     $no_hp = $row['no_hp'];
-        //     // Lakukan operasi lain dengan nomor telepon
-        // }
     }
 
     public function update_status($id, $status) {
