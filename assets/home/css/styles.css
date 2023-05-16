@@ -2243,7 +2243,7 @@ textarea.form-control-lg {
           print-color-adjust: exact;
 }
 .form-check-input[type=checkbox] {
-  border-radius: 0.25em;
+  border-radius: 1rem;
 }
 .form-check-input[type=radio] {
   border-radius: 50%;
@@ -11057,4 +11057,10 @@ html {
   color: #555;
 }
 
+.disabled-checkbox:disabled {
+  filter: grayscale(100%);
+}
 
+.disabled-checkbox:disabled + h4 {
+  color: red;
+}

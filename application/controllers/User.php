@@ -38,9 +38,9 @@ class User extends CI_Controller {
 	public function dashboard()
 	{						
 		$user_id = $this->session->userdata('iduser');
-		$data['data'] = $this->M_User->get_data_by_user_id($user_id);
-		$data['data2'] = $this->M_User->count_order_by_id($user_id);
-		$this->load->view('index/navuser');
+		$data['data'] = $this->M_User->count_ordersuccess_user($user_id);
+		$data['data2'] = $this->M_User->count_orderpending_user($user_id);
+		$this->load->view('index/navuser',$data);
 		$this->load->view('index/dashboard/header');							
 		$this->load->view('index/dashboard/index');		
 		$this->load->view('index/footeruser');						
@@ -60,7 +60,8 @@ class User extends CI_Controller {
 	{			
 		$user_id = $this->session->userdata('iduser');
 		$data['data'] = $this->M_User->get_data_by_user_id($user_id);
-		$data['data2'] = $this->M_User->count_order_by_id($user_id);			
+		$data['data2'] = $this->M_User->count_order_by_id($user_id);	
+		$data['data3'] = $this->M_User->get_data_by_today($user_id);		
 		$this->load->view('index/navuser', $data);
 		$this->load->view('index/dashboard/header');							
 		$this->load->view('index/dashboard/pesanan');		

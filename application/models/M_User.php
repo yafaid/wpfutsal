@@ -15,6 +15,41 @@ class M_User extends CI_Model {
         $query = $this->db->get('order');
         return $query->result();
     }
+    public function get_data_by_today($user_id)
+    {
+        $today = date('Y-m-d'); // Mendapatkan tanggal hari ini
+        
+        $this->db->where('user_id', $user_id);
+        $this->db->where('tanggal', $today); // Menambahkan kondisi tanggal hari ini
+        $this->db->where('is_active', 2);
+        $query = $this->db->get('order');
+        
+        return $query->result();
+    }
+    
+    public function count_orderpending_user($user_id)
+    {
+        $this->db->select('COUNT(*) as total_order');
+        $this->db->from('order');
+        $this->db->where('user_id', $user_id);
+        $this->db->where('is_active', 1);
+        $query = $this->db->get();
+        $result = $query->row();
+        return $result->total_order;
+    }
+    public function count_ordersuccess_user($user_id)
+    {
+        $today = date('Y-m-d'); // Mendapatkan tanggal hari ini
+
+        $this->db->select('COUNT(*) as total_order');
+        $this->db->from('order');
+        $this->db->where('user_id', $user_id);
+        $this->db->where('tanggal', $today);
+        $this->db->where('is_active', 2);
+        $query = $this->db->get();
+        $result = $query->row();
+        return $result->total_order;
+    }
 
     public function count_order_by_id($user_id) {
         $this->db->select('COUNT(*) as total_order');
