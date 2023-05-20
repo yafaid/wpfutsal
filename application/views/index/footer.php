@@ -4,7 +4,7 @@
                 <div class="row">
                     <!-- Footer Location-->
                     <div class="col-lg-4 mb-5 mb-lg-0">
-                        <h4 class="text-uppercase mb-4">Location</h4>
+                        <h4 class="text-uppercase mb-4">Lokasi</h4>
                         <p class="lead mb-0">
                             Jl. Karya Timur 
                             <br />
@@ -23,9 +23,7 @@
                     <div class="col-lg-4">
                         <h4 class="text-uppercase mb-4">Tentang Web ini</h4>
                         <p class="lead mb-0">
-                            Freelance is a free to use, MIT licensed Bootstrap theme created by
-                            <a href="http://startbootstrap.com">Start Bootstrap</a>
-                            .
+                            Ini Web Pemesanan Futsal.
                         </p>
                     </div>
                 </div>

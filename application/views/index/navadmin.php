@@ -40,11 +40,7 @@
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="<?= site_url('admin') ?>">Reservasi <i class="fas fa-address-book"></i></a></li>
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="<?= site_url('login/logout') ?>">Logout <i class="fas fa-arrow-right-from-bracket"></i></a></li>
                 <?php } else if ($this->session->userdata('role_id') == 2){ ?>
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="<?= site_url('user/dashboard') ?>">Pesan</a></li>
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="<?= site_url('login/logout') ?>">Logout</a></li>
                 <?php } else {?>
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="<?= site_url('login') ?>">Login</a></li>
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="<?= site_url('register') ?>">Daftar Sekarang</a></li>
                 <?php } ?>
             </ul>
         </div>

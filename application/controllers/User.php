@@ -35,6 +35,13 @@ class User extends CI_Controller {
 		$this->load->view('index/footer');							
 	}
 
+	public function bantuan()
+	{				
+		$this->load->view('index/navuser');							
+		$this->load->view('index/dashboard/bantuan');		
+		$this->load->view('index/footeruser');					
+	}
+
 	public function dashboard()
 	{						
 		$user_id = $this->session->userdata('iduser');

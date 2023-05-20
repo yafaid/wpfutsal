@@ -193,6 +193,9 @@
                                     </div>     
                                 </div>
                                 <div class="card-footer text-center py-5">   
+                                    <div class="alert alert-danger text-center text-uppercase" role="alert">
+                                    Silahkan Transfer pada No Rek 123123123123 a.n WPFutsal dan kirim bukti pembayarannya dibawah
+                                    </div>
                                     <input type="file" class="btn btn-xl btn-outline-dark w-100" name="bukti" id="bukti" value="<?= set_value('bukti');?>" required="required"><br><br>
                                     <input type="submit" class="btn btn-xl btn-outline-dark" value="Submit">                                  
                                 </div>

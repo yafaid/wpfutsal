@@ -25,7 +25,7 @@
                     <?php if ($this->session->userdata('role_id') == 1) { ?>
                                                
                     <?php } else if ($this->session->userdata('role_id') == 2) { ?>
-                        <a class="btn btn-xl btn-outline-dark" href="<?= site_url('user/dashboard') ?>">
+                        <a class="btn btn-xl btn-outline-dark" href="<?= site_url('user/pesan') ?>">
                         <i class="fas fa-pen-to-square"></i>
                         Pesan Lapangan
                         </a>

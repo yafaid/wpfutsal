@@ -47,7 +47,9 @@
                                             <td><?= $row->jam; ?>.00</td>
                                             <td>
                                                 <?php if ($row->bukti): ?>
-                                                    <img src="<?= base_url('uploads/bukti/' . $row->bukti) ?>" style="max-width: 200px; height: auto;" alt="Bukti">
+                                                    <a href="<?= base_url('uploads/bukti/' . $row->bukti) ?>">Bukti Bayar                                                      
+                                                    </a>
+                                                    <!-- <img src="<?= base_url('uploads/bukti/' . $row->bukti) ?>" style="max-width: 200px; height: auto;" alt="Bukti"> -->
                                                 <?php endif; ?>                                           
                                             </td>
                                             <td>
