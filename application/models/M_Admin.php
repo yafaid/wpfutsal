@@ -27,9 +27,12 @@ class M_Admin extends CI_Model {
 
 
     public function get_data_pending() {
-        $this->db->where('is_active', 1);
-        $query = $this->db->get('order');
-        return $query->result();
+        $this->db->select('order.*, user.ktp');
+        $this->db->from('order');
+        $this->db->join('user', 'user.iduser = order.user_id');
+        $this->db->where('order.is_active', 1);
+        $query = $this->db->get();
+        return $query->result();    
     }
 
     public function update_status($id, $status) {

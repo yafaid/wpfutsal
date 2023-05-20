@@ -251,6 +251,7 @@
                             let string_input = value.jam;
                             let match = string_input.match(/^\d{2}/);
                              $(`#jam_${match[0]}`).prop( "disabled", true );
+                            //  $(`#jam_${match[0]}`).prop( "checked", true );
                         });
 
                     },
