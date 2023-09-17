@@ -1,0 +1,38 @@
+.calendar {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ccc;
+  }
+
+.header {
+    display: flex;
+    flex-direction: row;
+    font-weight: bold;
+  }
+
+.cell {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
+
+.body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+.row {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+  }
+
+.cell:not(:first-child) {
+    cursor: pointer;
+  }
+
+.cell.booked {
+    background-color: #ccc;
+  }
