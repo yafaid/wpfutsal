@@ -88,6 +88,7 @@
     $('#kode_kelas').on( "change", function() {
         var val = $( this ).val();
         var tanggal = $('#tanggal').val();
+        var mapel = $('#kode_mapel').val();
 
         $.ajax({
                     url: "{{ route('get.kelas') }}",

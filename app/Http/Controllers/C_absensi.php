@@ -13,7 +13,6 @@ class C_absensi extends Controller
         $kelas_id  = $request->input('kelas_id');
 
         $data = Siswa::where('kelas_id', $kelas_id )->get();
-
         $html = '';
         foreach ($data as $key => $value) {
             $html .= "<tr>
