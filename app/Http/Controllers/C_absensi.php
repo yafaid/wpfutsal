@@ -25,7 +25,7 @@ class C_absensi extends Controller
                      </tr>";
         }
 
-        return response()->json(['message' => 'Guru berhasil diedit','data' => $html], 200);
+        return response()->json(['message' => 'berhasil ambil data','data' => $html], 200);
 
     }
 

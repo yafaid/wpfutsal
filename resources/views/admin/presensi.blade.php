@@ -87,18 +87,19 @@
     <script>
     $('#kode_kelas').on( "change", function() {
         var val = $( this ).val();
+        var tanggal = $('#tanggal').val();
 
         $.ajax({
                     url: "{{ route('get.kelas') }}",
                     method: 'POST',
                     data: {
+                        tanggal: tanggal,
                         kelas_id: val,
                         _token: $('meta[name="csrf-token"]').attr('content')
                     },
                     success: function(response) {
 
                         $('#tbody').html(response.data);
-
                     },
                     error: function(xhr, status, error) {
                         Swal.fire({
